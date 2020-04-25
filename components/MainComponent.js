@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import Home from './HomeComponent';
 import Directory from './DirectoryComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
+import { CAMPSITES } from '../shared/campsites';
 import { View, Platform } from 'react-native';
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
 const DirectoryNavigator = createStackNavigator(
     {
         Directory: { screen: Directory },
-        CampsiteInfo: { screen: CampsiteInfo}
+        CampsiteInfo: { screen: CampsiteInfo }
     },
     {
         initialRouteName: 'Directory',
@@ -42,8 +44,8 @@ const HomeNavigator = createStackNavigator(
 
 const MainNavigator = createDrawerNavigator(
     {
-        Home: { screen: HomeNavigator},
-        Directory: { screen: DirectoryNavigator}
+        Home: { screen: HomeNavigator },
+        Directory: { screen: DirectoryNavigator }
     },
     {
         drawerBackgroundColor: '#CEC8FF'
@@ -66,8 +68,8 @@ class Main extends Component {
     render() {
         return (
             <View style={{
-                flex: 1, 
-                paddingTop: Platform.OS === 'ios' ? 0 : export.Constants.statusBarHeight 
+                flex: 1,
+                paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight
             }}>
                 <MainNavigator />
             </View>
