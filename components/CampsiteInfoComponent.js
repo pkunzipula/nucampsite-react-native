@@ -4,10 +4,9 @@ import { Card, Icon } from 'react-native-elements';
 import { CAMPSITES } from '../shared/campsites';
 import { COMMENTS } from '../shared/comments';
 
-function RenderCampsite({props}) {
-   
-    const {campsite} = props;
+function RenderCampsite(props) {
 
+    const {campsite} = props;
     if (campsite) {
         return (
             <Card
@@ -77,7 +76,6 @@ class CampsiteInfo extends Component {
         const campsiteId = this.props.navigation.getParam('campsiteId');
         const campsite = this.state.campsites.filter(campsite => campsite.id === campsiteId)[0];
         const comments = this.state.comments.filter(comment => comment.campsiteId === campsiteId);
-
         return (
             <ScrollView>
                 <RenderCampsite campsite={campsite}
