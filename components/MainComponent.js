@@ -4,12 +4,20 @@ import Directory from './DirectoryComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
-import { CAMPSITES } from '../shared/campsites';
 import { View, Platform, StyleSheet, Text, ScrollView, Image } from 'react-native';
 import { createStackNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import SafeAreaView from 'react-native-safe-area-view';
+import { connect } from 'react-redux';
+import { fetchCampsites, fetchComments, fetchPromotions,
+    fetchPartners } from '../redux/ActionCreators';
 
+const mapDispatchToProps = {
+    fetchCampsites,
+    fetchComments,
+    fetchPromotions,
+    fetchPartners
+};
 
 const DirectoryNavigator = createStackNavigator(
     {
@@ -190,16 +198,12 @@ const MainNavigator = createDrawerNavigator(
 );
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          campsites: CAMPSITES,
-          selectedCampsite: null
-        };
-    }
-
-    onCampsiteSelect(campsiteId) {
-        this.setState({selectedCampsite: campsiteId});
+    
+    componentDidMount() {
+        this.props.fetchCampsites();
+        this.props.fetchComments();
+        this.props.fetchPromotions();
+        this.props.fetchPartners();
     }
 
     render() {
@@ -244,4 +248,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Main;
+export default connect(null, mapDispatchToProps)(Main);
