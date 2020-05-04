@@ -52,7 +52,7 @@ class Reservation extends Component {
                 </View>
                 <View>
                     <Text> Hike-In? </Text>
-                    <Switch value={this.state.hikeIn} trackColor={{true: '#5637DD', false: null}} onValueChange={value => this.setState({hik: value})}>
+                    <Switch value={this.state.hikeIn} trackColor={{true: '#5637DD', false: null}} onValueChange={value => this.setState({hikeIn: value})}>
                     </Switch>
                 </View>
                 <View>
