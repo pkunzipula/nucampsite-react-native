@@ -38,6 +38,8 @@ function RenderCampsite(props) {
 
   const recognizeDrag = ({ dx }) => (dx < -200 ? true : false);
 
+  const recognizeComment = ({ dx }) => (dx > 200 ? true : false);
+
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderGrant: () => {
@@ -69,6 +71,8 @@ function RenderCampsite(props) {
           ],
           { cancelable: false }
         );
+      } else if (recognizeComment(gestureState)) {
+        props.onShowModal();
       }
       return true;
     },
@@ -149,15 +153,17 @@ function RenderComments({ comments }) {
   );
 }
 
+const initialState = {
+  showModal: false,
+  rating: 5,
+  author: "",
+  text: "",
+};
+
 class CampsiteInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showModal: false,
-      rating: 5,
-      author: "",
-      text: "",
-    };
+    this.state = initialState;
   }
 
   markFavorite(campsiteId) {
@@ -179,12 +185,7 @@ class CampsiteInfo extends Component {
   }
 
   resetForm() {
-    this.setState({
-      showModal: false,
-      rating: 5,
-      author: "",
-      text: "",
-    });
+    this.setState(initialState);
   }
 
   static navigationOptions = {
